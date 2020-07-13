@@ -1,6 +1,6 @@
 # TSIT: A Simple and Versatile Framework for Image-to-Image Translation
 
-![teaser](resources/teaser.pdf)
+![teaser](resources/teaser.png)
 
 This repository will provide the code for the following paper:
 
