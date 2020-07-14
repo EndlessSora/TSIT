@@ -2,7 +2,7 @@
 
 ![teaser](resources/teaser.png)
 
-This repository will provide the code for the following paper:
+This repository will provide the official code for the following paper:
 
 **TSIT: A Simple and Versatile Framework for Image-to-Image Translation**<br>
 [Liming Jiang](https://liming-jiang.com/),  [Changxu Zhang](http://zhangcx.top/), Mingyang Huang, [Chunxiao Liu](https://scholar.google.com/citations?user=4m061tYAAAAJ&hl=en&oi=ao), [Jianping Shi](http://shijianping.me/) and [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/)<br>
