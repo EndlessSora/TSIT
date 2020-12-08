@@ -24,7 +24,7 @@ If you find this work useful for your research, please cite our paper:
 
 ```
 @inproceedings{jiang2020tsit,
-  title={TSIT: A Simple and Versatile Framework for Image-to-Image Translation},
+  title={{TSIT}: A Simple and Versatile Framework for Image-to-Image Translation},
   author={Jiang, Liming and Zhang, Changxu and Huang, Mingyang and Liu, Chunxiao and Shi, Jianping and Loy, Chen Change},
   booktitle={ECCV},
   year={2020}
