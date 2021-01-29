@@ -2,7 +2,7 @@
 
 ![teaser](resources/teaser.jpg)
 
-This repository will provide the official code for the following paper:
+This repository provides the official PyTorch implementation for the following paper:
 
 **TSIT: A Simple and Versatile Framework for Image-to-Image Translation**<br>
 [Liming Jiang](https://liming-jiang.com/),  [Changxu Zhang](http://zhangcx.top/), Mingyang Huang, [Chunxiao Liu](https://scholar.google.com/citations?user=4m061tYAAAAJ&hl=en&oi=ao), [Jianping Shi](http://shijianping.me/) and [Chen Change Loy](http://personal.ie.cuhk.edu.hk/~ccloy/)<br>
@@ -12,11 +12,108 @@ In ECCV 2020 (Spotlight).<br>
 
 ## Updates
 
+- [01/2021] The **code** of TSIT is **released**.
+
 - [07/2020] The [paper](https://arxiv.org/abs/2007.12072) of TSIT is accepted by **ECCV 2020 (Spotlight)**.
 
-## Code
+## Installation
 
-The code of our work will be made publicly available. Please stay tuned.
+After installing [Anaconda](https://www.anaconda.com/), we recommend you to create a new conda environment with python 3.7.6:
+
+```bash
+conda create -n tsit python=3.7.6 -y
+conda activate tsit
+```
+
+Clone this repo, install PyTorch 1.1.0 (newer versions may also work) and other the dependencies:
+
+```bash
+git clone https://github.com/EndlessSora/TSIT.git
+cd TSIT
+pip install -r requirements.txt
+```
+
+This code also requires the Synchronized-BatchNorm-PyTorch:
+
+```bash
+cd models/networks/
+git clone https://github.com/vacancy/Synchronized-BatchNorm-PyTorch
+cp -rf Synchronized-BatchNorm-PyTorch/sync_batchnorm .
+rm -rf Synchronized-BatchNorm-PyTorch
+cd ../../
+```
+
+## Tasks and Datasets
+
+The code covers 3 image-to-image translation tasks on 5 datasets. For more details, please refer to our [paper](https://arxiv.org/abs/2007.12072).
+
+### Task Abbreviations
+
+* **Arbitrary Style Transfer (AST)** on *Yosemite summer → winter*, *BDD100K day → night*, and *Photo → art* datasets.
+* **Semantic Image Synthesis (SIS)** on *Cityscapes* and *ADE20K* datasets.
+* **Multi-Modal Image Synthesis (MMIS)** on *BDD100K sunny → different time/weather conditions* dataset.
+
+The abbreviations is used to specify `--task` argument when training and testing.
+
+### Dataset Preparation
+
+We provide one-click scripts to prepare datasets. The details will be provided below.
+
+* **Yosemite summer → winter** and **Photo → art**. The provided scripts will make all things ready (including the download). For example, simply run:
+
+```bash
+bash datasets/prepare_summer2winteryosemite.sh
+```
+
+* **BDD100K**. Please first download BDD100K [Images](https://doc.bdd100k.com/download.html#images) on their [official website](https://bdd-data.berkeley.edu/). We have provided the classified [lists](./datasets/bdd100k_lists) of different weathers and times. After downloading, you only need to run:
+
+```bash
+bash datasets/prepare_bdd100k.sh [data_root]
+```
+
+The `[data_root]` should be specified, which is path to the BDD100K root folder that contains `images` folder. The script will put the list to the suitable place and symlink the root folder to `./datasets`.
+
+* **Cityscapes**. Please follow the standard download and preparation guidelines on the [official website](https://www.cityscapes-dataset.com/). We recommend to symlink its root folder `[data_root]` to `./datasets` by:
+
+```bash
+bash datasets/prepare_cityscapes.sh [data_root]
+```
+
+* **ADE20K**. The dataset can be downloaded [here](http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip), which is from [MIT Scene Parsing BenchMark](http://sceneparsing.csail.mit.edu/). After unzipping the dataset, put the jpg image files `ADEChallengeData2016/images/` and png label files `ADEChallengeData2016/annotatoins/` in the same directory. We also recommend to symlink its root folder `[data_root]` to `./datasets` by:
+
+```bash
+bash datasets/prepare_ade20k.sh [data_root]
+```
+
+## Testing Pretrained Models
+
+1. Download the [pretrained models](https://drive.google.com/file/d/1eyLqSOifR1-UGY8yg8DrW6q7GSHKxCof/view?usp=sharing) and unzip them to `./checkpoints`.
+
+2. For a quick start, we have provided all the example [test scripts](./test_scripts). After preparing the corresponding datasets, you can directly use the test scripts. For example:
+
+```bash
+bash test_scripts/ast_summer2winteryosemite.sh
+```
+
+3. The generated images will be saved at `./results/[experiment_name]` by default.
+
+4. You can use `--results_dir` to specify the output directory. `--how_many` will specify the maximum number of images to generate. By default, the code loads the latest checkpoint, which can be changed using `--which_epoch`. You can also discard `--show_input` to show the generated images only without the input references.
+
+5. For *MMIS sunny → different time/weather conditions*, the `--test_mode` can be specified (optional): `night` | `cloudy` | `rainy` | `snowy` | `all` (default).
+
+## Training
+
+For a quick start, we have provided all the example [training scripts](./train_scripts). After preparing the corresponding datasets, you can directly use the training scripts. For example:
+
+```bash
+bash train_scripts/ast_summer2winteryosemite.sh
+```
+
+**Please note that** you may want to change the experiment name `--name` or the checkpoint saving root `--checkpoints_dir` to prevent your newly trained models overwriting the pretrained ones (if used).
+
+`--task` is given using the [abbreviations](#task-abbreviations). `--dataset_mode` specifies the dataset type. `--croot` and `--sroot` specify the content and style data root, respectively. The results may be better reproduced on NVIDIA Tesla V100 GPUs.
+
+After training, testing the newly trained models is similar to [testing pretrained models](#testing-pretrained-models).
 
 ## Citation
 
@@ -31,6 +128,6 @@ If you find this work useful for your research, please cite our paper:
 }
 ```
 
-## License
+## Acknowledgments
 
-Copyright (c) 2020
+The code is greatly inspired by [SPADE](https://github.com/NVlabs/SPADE), [pytorch-AdaIN](https://github.com/naoto0804/pytorch-AdaIN), and [Synchronized-BatchNorm-PyTorch](https://github.com/vacancy/Synchronized-BatchNorm-PyTorch).
