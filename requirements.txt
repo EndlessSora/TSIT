@@ -1,4 +1,4 @@
-Pillow==8.3.2
+Pillow
 torch==1.1.0
 torchvision==0.2.1
 dominate==2.4.0
