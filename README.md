@@ -25,7 +25,7 @@ conda create -n tsit python=3.7.6 -y
 conda activate tsit
 ```
 
-Clone this repo, install PyTorch 1.1.0 (newer versions may also work) and other the dependencies:
+Clone this repo, install PyTorch 1.1.0 (newer versions may also work) and other dependencies:
 
 ```bash
 git clone https://github.com/EndlessSora/TSIT.git
@@ -53,11 +53,11 @@ The code covers 3 image-to-image translation tasks on 5 datasets. For more detai
 * **Semantic Image Synthesis (SIS)** on *Cityscapes* and *ADE20K* datasets.
 * **Multi-Modal Image Synthesis (MMIS)** on *BDD100K sunny → different time/weather conditions* dataset.
 
-The abbreviations is used to specify `--task` argument when training and testing.
+The abbreviations are used to specify the `--task` argument when training and testing.
 
 ### Dataset Preparation
 
-We provide one-click scripts to prepare datasets. The details will be provided below.
+We provide one-click scripts to prepare datasets. The details are provided below.
 
 * **Yosemite summer → winter** and **Photo → art**. The provided scripts will make all things ready (including the download). For example, simply run:
 
@@ -71,7 +71,7 @@ bash datasets/prepare_summer2winteryosemite.sh
 bash datasets/prepare_bdd100k.sh [data_root]
 ```
 
-The `[data_root]` should be specified, which is path to the BDD100K root folder that contains `images` folder. The script will put the list to the suitable place and symlink the root folder to `./datasets`.
+The `[data_root]` should be specified, which is the path to the BDD100K root folder that contains `images` folder. The script will put the list to the suitable place and symlink the root folder to `./datasets`.
 
 * **Cityscapes**. Please follow the standard download and preparation guidelines on the [official website](https://www.cityscapes-dataset.com/). We recommend to symlink its root folder `[data_root]` to `./datasets` by:
 
