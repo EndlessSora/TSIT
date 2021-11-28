@@ -131,3 +131,9 @@ If you find this work useful for your research, please cite our paper:
 ## Acknowledgments
 
 The code is greatly inspired by [SPADE](https://github.com/NVlabs/SPADE), [pytorch-AdaIN](https://github.com/naoto0804/pytorch-AdaIN), and [Synchronized-BatchNorm-PyTorch](https://github.com/vacancy/Synchronized-BatchNorm-PyTorch).
+
+## License
+
+Copyright (c) 2020. All rights reserved.
+
+The code is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) (**Attribution-NonCommercial-ShareAlike 4.0 International**).
